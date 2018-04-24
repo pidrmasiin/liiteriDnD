@@ -1,0 +1,34 @@
+
+.test { 
+  background: url('https://www.atrafloor.com/app/uploads/2017/01/city-life-kids-town-map-flooring-green.jpg'); 
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  
+}
+
+.speak {
+  background-color: black;
+  color: orange;
+  text-align: center;
+}
+
+.myIframe {
+  position: relative;
+  padding-bottom: 65.25%;
+  padding-top: 30px;
+  height: 100%;
+  overflow: auto; 
+  -webkit-overflow-scrolling:touch; 
+  border: solid black 1px;
+} 
+.myIframe iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
