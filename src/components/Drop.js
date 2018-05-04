@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ItemTypes } from './Constants';
 import { DropTarget } from 'react-dnd';
-import cottage from './cottage.png'
-import App from './App';
-import after from './afterReducer'
+import cottage from './maja.png'
 
 
 const squareTarget = {
@@ -33,11 +31,12 @@ class Drop extends React.Component {
    
             return connectDropTarget(
                 <div style={{
-                    position: 'relative',
-                    width: '100%',
+                    position: 'absolute',
+                    width: '450px',
                     height: '100%'
                   }}>
-                    <img src={cottage}/>
+                    <img style={{ width:'450px',
+                    height: '450px'}}src={cottage} alt='kylä'/>
                   
                     {isOver &&
                       this.after()
