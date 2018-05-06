@@ -1,6 +1,6 @@
 import React from 'react'
 import './Info.css'
-import { Grid, Image, Header, Form, Message, Button } from 'semantic-ui-react'
+import { Grid, Image, Header, Form, Message, Button, Icon, Item } from 'semantic-ui-react'
 import Circle from './Circle'
 import userService from '../services/user'
 
@@ -9,20 +9,27 @@ class Info extends React.Component {
     state = {
         date: Date,
         visible: false,
+        info: true,
         phone: '',
         email: ''
     }
 
-    componentWillMount = async () => {
+    componentWillMount = () => {
         this.setState({
             date: new Date()
         })
         setTimeout(() => {
             this.addUserAndRenderHome()
-           }, 90000);
+           }, 110000);
     }
 
-    add = async (e) => {
+    info = () => {
+        this.setState({
+            info: !this.state.info
+        })
+    } 
+
+    add = (e) => {
         e.preventDefault()
         this.setState({
             visible: true,
@@ -45,9 +52,7 @@ class Info extends React.Component {
         userService.addUser(user)
         window.location.assign('/')
     }
-
     
-
     render() {
         return (
             <div className="liiteri">
@@ -55,31 +60,25 @@ class Info extends React.Component {
                     <Grid.Row>
                     </Grid.Row>
                     <Grid.Row>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Grid.Column width={5}>
-                        </Grid.Column>
-                        <Grid.Column className='circleBase type3' width={6}>
-                            <Image src="http://liiteri.net/wp-content/uploads/2017/12/Liiteri-logo_700x300.png" alt="logo" />
-                        </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                        <Grid.Column width={2}>
+                    <Grid.Column width={2}>
                         </Grid.Column>
                         <Grid.Column width={12}>
-                            <Header>
-                            I am a magic box where broken bikes become fixed. Access me whenever you need. Just register with your email address and you will receive a unique code on your mobile. This magic password will let you inside. 
-                            Your bike will be safe in gentle hands and we will repair it as soon as possible. We will reach out to you when the wounds of your beloved bike have been healed.  
-                            BTW! I also contain a great selection of household tools that are in your service around the clock with 9,99€ monthly. Sounds cool? Go check more information on our website liiteri.net.</Header>
-                            <br/>
+                    <Item.Group>
+                          <Item >
+                              <Item.Content>
+                              <Image src="http://liiteri.net/wp-content/uploads/2017/12/Liiteri-logo_700x300.png" alt="logo" />
+                                  <Item.Header><p style={{textAlign: 'center'}}>Hassle-free repair @Liiteri.  Liiteri.net provides repais services and houshold tools for rent. </p></Item.Header>
+                              </Item.Content>
+                          </Item>
+                      </Item.Group>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row verticalAlign='top'>
                         <Grid.Column width={7}>
                             <Circle
                                 head='24/7'
-                                description='Tuo tavarasi huoltoon juuri silloin kuin sinulle sopii'
-                                text='Olemme aina auki ja järjestämme huollon puolestasi. Koska vain, milloin vain, aina helppoa.'
+                                description=''
+                                text='Repair service that never closes'
                                 color='pink'
                             />
                         </Grid.Column>
@@ -89,10 +88,11 @@ class Info extends React.Component {
                         </Grid.Column>
                         <Grid.Column width={7}>
                             <Circle
-                                head='Pysy liikkeessä!'
-                                description='Jätä korjattava tuote Liiteriin ja ota alle sähköpyörä'
-                                text='Liiterit sijaitsevat liikenteen solmukohdissa. Olet sitten matkalla töihin tai kauppaan, poikkea Liiteriin'
+                                head='On the go...'
+                                text='Repair service easily accessible on your mobile'
+                                description=''
                                 color='#ccffff'
+                                button={true}
                             />
                         </Grid.Column>
                     </Grid.Row>
@@ -101,9 +101,9 @@ class Info extends React.Component {
                         </Grid.Column>
                         <Grid.Column width={7}>
                             <Circle
-                                head='Mikä Liiteri?'
-                                description='Liiteri tarjoaa kestävän elämäntavan palveluna'
-                                text='Säästät tilaa ja ympäristöä'
+                                head='Contact'
+                                description=''
+                                text='Leaves us your worries and contact information and we will take care of the rest'
                                 color='#ffff66'
                             />
                         </Grid.Column>
@@ -112,25 +112,44 @@ class Info extends React.Component {
                         <Grid.Column width={7}>
                             <Form success onSubmit={this.add}>
                                 <Form.Field>
-                                    <label>Numero</label>
+                                    <label>Phone</label>
                                     <input placeholder='404-12456879' name='phone'/>
                                 </Form.Field>
                                 <Form.Field>
-                                    <label>Sähköposti</label>
+                                    <label>Email</label>
                                     <input placeholder='meikä@mandoliini.fi' name='email'/>
                                 </Form.Field>
                                 <Message style={{ display: this.state.visible ? '' : 'none' }}
                                     success
-                                    header='Teit hyvän päätöksen!'
-                                    content="Otamme sinuun yhteyttä mahdollisimman pian."
+                                    header='Form Completed'
+                                    content="You're all signed up for the newsletter"
                                 />
-                                <Button positive type="submit">Hyväksy</Button>
+                                <Button positive type="submit">Submit</Button>
                             </Form>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
+                        <Grid.Column width={1}>
+                        </Grid.Column>
+                        <Grid.Column width={15}>
+                       
+                            <br/>
+                           <Button animated attached='bottom' color='orange' onClick={this.info}>
+                           <Button.Content visible> <Icon name='unhide' /></Button.Content>
+                           <Button.Content hidden>
+                           <Icon name='hide' />
+                           </Button.Content>
+                           </Button>
+                           {this.state.info &&
+                        <Header>
+                            I am a magic box where broken bikes become fixed. Access me whenever you need. Just register with your email address and you will receive a unique code on your mobile. This magic password will let you inside. 
+                            Your bike will be safe in gentle hands and we will repair it as soon as possible. We will reach out to you when the wounds of your beloved bike have been healed.  
+                            BTW! I also contain a great selection of household tools that are in your service around the clock with 9,99€ monthly. Sounds cool? Go check more information on our website liiteri.net.</Header>
+                        }
+                        </Grid.Column>
                     </Grid.Row>
                 </Grid>
+               
             </div>
         )
     }

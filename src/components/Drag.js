@@ -121,7 +121,6 @@ class Drag extends React.Component {
          <Grid.Column width={2}>
          <Swipe/>
          </Grid.Column >
-          <Swipe/>
          </Grid.Row>
          </Grid>
          </div>
