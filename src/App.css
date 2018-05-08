@@ -11,11 +11,15 @@
 }
 
 .speak {
-  background-color: black;
+  background: black;
   color: orange;
   text-align: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
-
 .myIframe {
   position: relative;
   padding-bottom: 65.25%;

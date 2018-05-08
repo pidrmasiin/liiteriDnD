@@ -3,12 +3,13 @@ import { Grid, Header } from 'semantic-ui-react'
 import girl from './girl.png'
 import apploud from './apploud.png'
 import '../App.css';
+import Info from './Info';
 
 class After extends React.Component {
     state = {
         after: false
     };
-    componentWillMount = () => {
+    componentDidMount = () => {
         setTimeout(() => {
             this.setState({
                 after: true
@@ -17,8 +18,8 @@ class After extends React.Component {
     }
     render() {
         if(this.state.after){
-            this.props.history.push('/info')
-        }
+            return <Info />
+        } 
         return (
                   <div className='test'>
                   <Grid>
@@ -50,8 +51,8 @@ class After extends React.Component {
                     <img src={apploud} alt='apploud'/>
                     </Grid.Row>
                    </Grid>
+                  
                  </div>
-               
         )
     }
 }

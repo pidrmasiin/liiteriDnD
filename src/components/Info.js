@@ -14,13 +14,13 @@ class Info extends React.Component {
         email: ''
     }
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         this.setState({
             date: new Date()
         })
         setTimeout(() => {
             this.addUserAndRenderHome()
-           }, 110000);
+           }, 15000);
     }
 
     info = () => {
@@ -50,7 +50,11 @@ class Info extends React.Component {
             email: this.state.email
         }
         userService.addUser(user)
-        window.location.assign('/')
+        if(this.props.cyclist){
+            this.props.history.history.push('/cyclist')
+        } else {
+            window.location.assign('/')
+        }
     }
     
     render() {

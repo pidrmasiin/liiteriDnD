@@ -126,7 +126,6 @@ class Drag extends React.Component {
          </div>
        )
     }
-    
     return(
       <After history={this.props.history}/>
     )
