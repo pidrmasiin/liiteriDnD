@@ -1,10 +1,10 @@
 # Drag and Drop -animation for liiteri
 
-Two animation for testing the marketing for liiteri
+Two animation for testing the liiteri's tablet. https://liiterimap.herokuapp.com/ 
 
-# Map
+# Map (components)
 
-Drag the guy to the cottage and get the applauds. I have used Drag and Drop library with the touch backend. http://react-dnd.github.io/react-dnd/ 
+Drag the guy to the cottage and get the applauds. For this I have used Drag and Drop library with the touch backend. http://react-dnd.github.io/react-dnd/ 
 
 # Cyclist
 
