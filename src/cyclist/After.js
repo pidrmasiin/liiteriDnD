@@ -7,6 +7,7 @@ import Cyclist from './Cyclist.js'
 import Info from '../components/Info.js'
 import { Grid, Image} from 'semantic-ui-react'
 import Happy from './Happy.js'
+import cheering from './sounds/cheering.mp3'
                        
 class After extends React.Component {
     state = {
@@ -20,11 +21,14 @@ class After extends React.Component {
                   cyclist: !this.state.cyclist
               })
           }, 2000)
-          setTimeout(() => {
-              this.setState({
-                  after: !this.state.after
-              })
-          }, 6000)
+      }
+
+      componentWillMount = () => {
+        setTimeout(() => {
+            this.setState({
+                after: !this.state.after
+            })
+        }, 9000)
       }
 
       componentDidEnter () {
@@ -46,7 +50,10 @@ class After extends React.Component {
               )
           }
           return(
-              <div className="liiteri" ref={c => this.container = c}>
+              <div ref={c => this.container = c}>
+               <audio autoPlay>
+                     <source src={cheering}/>
+                </audio> 
                   <Grid style={{height: '100vh'}}>
                       <Grid.Row>
                       </Grid.Row>

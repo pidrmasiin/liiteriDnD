@@ -9,7 +9,7 @@ class Info extends React.Component {
     state = {
         date: Date,
         visible: false,
-        info: true,
+        info: false,
         phone: '',
         email: ''
     }
@@ -20,7 +20,7 @@ class Info extends React.Component {
         })
         setTimeout(() => {
             this.addUserAndRenderHome()
-           }, 15000);
+           }, 90000);
     }
 
     info = () => {
@@ -51,15 +51,14 @@ class Info extends React.Component {
         }
         userService.addUser(user)
         if(this.props.cyclist){
-            this.props.history.history.push('/cyclist')
+            window.location.assign('/cyclist')
         } else {
-            window.location.assign('/')
+            window.location.assign('/lost')
         }
     }
     
     render() {
         return (
-            <div className="liiteri">
                 <Grid className='container'>
                     <Grid.Row>
                     </Grid.Row>
@@ -154,7 +153,6 @@ class Info extends React.Component {
                     </Grid.Row>
                 </Grid>
                
-            </div>
         )
     }
 }

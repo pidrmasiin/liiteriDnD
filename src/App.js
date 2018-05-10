@@ -7,13 +7,14 @@ import Data from './components/Data';
 import Info from './components/Info';
 import After from './cyclist/After';
 import Unbroken from './cyclist/Unbroken';
+import BoomAnime from './cyclist/BoomAnime.js'
+import Broken from './cyclist/Broken.js'
 
 class App extends React.Component {
 
   render() {
     console.log('store', this.props.store.getState())
       return  (
-        <div className="liiteri">
         <Router>
         <div className='mydiv'>
             <Route exact path="/" render={({history}) => <Data history={history}/>} />
@@ -21,10 +22,10 @@ class App extends React.Component {
             <Route exact path="/info" render={(history) => <Info history={history}/>} />
             <Route exact path="/after" render={(history) => <After history={history}/>} />
             <Route exact path="/cyclist" render={(history) => <Unbroken history={history}/>} />
-            <Route exact path="/unbroken" render={(history) => <Unbroken history={history}/>} />
+            <Route exact path="/boom" render={(history) => <BoomAnime history={history}/>} />
+            <Route exact path="/broken" render={(history) => <Broken history={history}/>} />
             </div>
       </Router>
-      </div>
       )
 }
 }

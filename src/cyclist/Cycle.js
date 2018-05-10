@@ -17,13 +17,13 @@ export default class Cycle extends React.Component {
             animationData: animationData,
         }
  
-        return <div>
+        return (<div>
             {this.props.speak && <h1 className='speak'>{this.props.speak}</h1>}
             <Lottie options={defaultOptions}
                 height={'100%'}
                 width={'100%'}
                 isStopped={this.state.isStopped}
                 isPaused={this.state.isPaused}/>
-        </div>
+        </div>)
     }
 }

@@ -3,6 +3,7 @@ import userService from '../services/user'
 import { Table } from 'semantic-ui-react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import '../App.css';
 
 class Data extends React.Component {
 
@@ -21,15 +22,13 @@ class Data extends React.Component {
 
         const navStyle = {
             background: '#a3c2c2',
-            marginLeft: 0,
           }
     
           const linkStyle = {
             color: "black"
           }
-         const dates = this.state.users.map(x =>  x.date)
         return (
-            <div className='container'>
+            <div className='liiteri'>
              <Menu inverted style={navStyle}>
                      <Menu.Item link>
                     <Link style={linkStyle} to="/cyclist"> Cyclist</Link>

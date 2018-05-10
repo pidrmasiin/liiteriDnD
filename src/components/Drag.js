@@ -1,12 +1,13 @@
 import React from 'react';
 import '../App.css';
 import girl from './girl.png'
+import please from './please.mp3'
+import hello from './hello.mp3'
 import cottage from './maja.png'
 import PropTypes from 'prop-types';
 import { ItemTypes } from './Constants';
 import Drop from './Drop';
 import After from './After';
-import Swipe from './Swipe';
 import { Grid } from 'semantic-ui-react'
 import { DragSource } from 'react-dnd';
 
@@ -32,7 +33,11 @@ class Drag extends React.Component {
     }
   }
 
-  componentWillUnmount = () => {
+  componentWillMount = () => {
+    document.getElementById('body').className='map'
+  }
+
+    componentWillUnmount(){
     setTimeout(()=> {
       this.setState({
         show: !this.state.show
@@ -60,6 +65,7 @@ class Drag extends React.Component {
   render() {
 
     if(this.state.drag){
+      
       this.componentWillUnmount()
     }
     if(!this.props.after){
@@ -79,11 +85,16 @@ class Drag extends React.Component {
         fontWeight: 'bold',
         cursor: 'move'
       }
+     
       return  connectDragSource(
         <div className='test' id='dragable'>
-         <h1 className='speak'>LIITERI!</h1>
+        
         <Grid style={{height: '100vh'}}>
+        
         <Grid.Row style={{height: '5%'}}>
+        <Grid.Column  width={16}>
+        <h1 className='speak'>LIITERI!</h1>
+         </Grid.Column>
          </Grid.Row>
         
          <Grid.Row style={{height: '40%'}}>
@@ -92,6 +103,11 @@ class Drag extends React.Component {
          <Grid.Column width={7}>
          </Grid.Column>
          <Grid.Column  width={5}>
+         {!this.state.show &&
+        <audio autoPlay>
+        <source src={hello}/>
+        </audio>
+         }
          <h1 style={visible2} className='speak'>HELP ME !</h1>
          <img style={visible2} alt='girl' id="drag1" src={girl} draggable="true" onDragStart={this.drag}/>
          </Grid.Column>
@@ -102,6 +118,11 @@ class Drag extends React.Component {
          <Grid.Row style={{height: '40%'}}>
          
          <Grid.Column width={5}>
+         {this.state.show &&
+        <audio autoPlay>
+        <source src={please}/>
+        </audio>
+         }
          <h1 style={visible1} className='speak'>DRAG ME TO THE CLOSEST LIITERI!</h1>
          <img style={visible1}  alt='girl' id="drag1" src={girl} draggable="true" onDragStart={this.drag}/>
          </Grid.Column>
@@ -119,13 +140,13 @@ class Drag extends React.Component {
          <Grid.Column width={12}>
          </Grid.Column >
          <Grid.Column width={2}>
-         <Swipe/>
          </Grid.Column >
          </Grid.Row>
          </Grid>
          </div>
        )
     }
+    document.getElementById('body').className='body'
     return(
       <After history={this.props.history}/>
     )
