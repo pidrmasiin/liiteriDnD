@@ -6,7 +6,6 @@ import './test.css'
 import Cycle from './Cycle'
 import bell from './sounds/bell.mp3'
 
-
 class Cyclist extends React.Component {
    
     componentDidEnter () {

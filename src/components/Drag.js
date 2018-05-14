@@ -8,8 +8,11 @@ import PropTypes from 'prop-types';
 import { ItemTypes } from './Constants';
 import Drop from './Drop';
 import After from './After';
+import Language from './Language';
 import { Grid } from 'semantic-ui-react'
 import { DragSource } from 'react-dnd';
+
+let timerId = null
 
 const dragSource = {
   beginDrag(props) {
@@ -28,8 +31,7 @@ class Drag extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      show: false,
-      drag: true
+      show: false
     }
   }
 
@@ -37,8 +39,9 @@ class Drag extends React.Component {
     document.getElementById('body').className='map'
   }
 
+ 
     componentWillUnmount(){
-    setTimeout(()=> {
+    timerId = setTimeout(()=> {
       this.setState({
         show: !this.state.show
       })
@@ -46,48 +49,37 @@ class Drag extends React.Component {
   }
  
   show = (e) => {
-    e.preventDefault();
-    this.setState({
+    timerId = this.setState({
       show: !this.state.show
     })
   }
 
-  drag = (e) => {
-  }
-
   allowDrop = (e) => {
     e.preventDefault();
-    this.setState({
+    timerId = this.setState({
       show: !this.state.show
     })
   }
   
   render() {
 
-    if(this.state.drag){
-      
+    if(!this.props.isDragging){
+      clearTimeout(timerId);
       this.componentWillUnmount()
     }
-    if(!this.props.after){
-     
+    if(!this.props.store.after){
+    
       const { connectDragSource, isDragging } = this.props;
-      const visible1 = { 
-        display: this.state.show ? '' : 'none',
+      const visible = { 
         opacity: isDragging ? 0.5 : 1,
         fontSize: 25,
         fontWeight: 'bold',
         cursor: 'move'
       }
-      const visible2 = { 
-        display: this.state.show ? 'none' : '',
-        opacity: isDragging ? 0.5 : 1,
-        fontSize: 25,
-        fontWeight: 'bold',
-        cursor: 'move'
-      }
+ 
      
-      return  connectDragSource(
-        <div className='test' id='dragable'>
+      return  (
+        <div className='test' >
         
         <Grid style={{height: '100vh'}}>
         
@@ -103,32 +95,36 @@ class Drag extends React.Component {
          <Grid.Column width={7}>
          </Grid.Column>
          <Grid.Column  width={5}>
-         {!this.state.show &&
-        <audio autoPlay>
+         {!this.state.show && <div><audio autoPlay>
         <source src={hello}/>
         </audio>
+         <h1 className='speak'>{this.props.store.language.help}</h1></div>}
+         {!this.state.show && 
+           connectDragSource(
+         <img id='dragable' style={visible} alt='girl' id="drag1" src={girl} draggable="true"/>)
          }
-         <h1 style={visible2} className='speak'>HELP ME !</h1>
-         <img style={visible2} alt='girl' id="drag1" src={girl} draggable="true" onDragStart={this.drag}/>
-         </Grid.Column>
-         <Grid.Column>
          </Grid.Column>
          </Grid.Row>
         
-         <Grid.Row style={{height: '40%'}}>
+         <Grid.Row style={{height: '35%'}}>
          
-         <Grid.Column width={5}>
-         {this.state.show &&
+         
+        
+        
+          <Grid.Column width={5}>
+          {this.state.show && <div>
         <audio autoPlay>
         <source src={please}/>
         </audio>
-         }
-         <h1 style={visible1} className='speak'>DRAG ME TO THE CLOSEST LIITERI!</h1>
-         <img style={visible1}  alt='girl' id="drag1" src={girl} draggable="true" onDragStart={this.drag}/>
-         </Grid.Column>
+         <h1 className='speak'>{this.props.store.language.drag}</h1></div>}
+         {this.state.show && 
+           connectDragSource(<img id='dragable' style={visible}  alt='girl' id="drag1" src={girl} draggable="true" />)
+         }</Grid.Column>
+         
+        
          <Grid.Column width={2}>
          </Grid.Column >
-         <Grid.Column >
+         <Grid.Column width={8}>
          <Drop>
             <div id="div1" onDrop={this.show} onDragOver={this.allowDrop}>
               <img src={cottage} alt='kylä'/>
@@ -142,13 +138,14 @@ class Drag extends React.Component {
          <Grid.Column width={2}>
          </Grid.Column >
          </Grid.Row>
+         <Language language={this.props.store.language}/>
          </Grid>
          </div>
        )
     }
     document.getElementById('body').className='body'
     return(
-      <After history={this.props.history}/>
+      <After history={this.props.history} lang={this.props.store.language}/>
     )
   }
 }

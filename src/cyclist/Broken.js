@@ -12,8 +12,6 @@ class Broken extends React.Component {
         speak: false
     };
 
- 
-  
     componentDidEnter () {
         setTimeout(() => {
             this.setState({
@@ -26,14 +24,14 @@ class Broken extends React.Component {
     }
   
     render () {
-       
+       console.log('porps', this.props)
         return (
             <div className='flip' ref={c => this.container = c}>
                <audio autoPlay>
                      <source src={sad}/>
                 </audio> 
                 <Image src={fall} alt="logo" />
-                { this.state.speak && <h1 className='speak'>Please, heal me with your gentle touch</h1>}
+                { this.state.speak && <h1 className='speak'>{this.props.language.fall}</h1>}
             </div>
            
         )

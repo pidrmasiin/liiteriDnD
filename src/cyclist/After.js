@@ -8,6 +8,8 @@ import Info from '../components/Info.js'
 import { Grid, Image} from 'semantic-ui-react'
 import Happy from './Happy.js'
 import cheering from './sounds/cheering.mp3'
+import ReactGA from 'react-ga';
+
                        
 class After extends React.Component {
     state = {
@@ -16,6 +18,10 @@ class After extends React.Component {
     };
 
       componentDidMount = () => {
+        ReactGA.event({
+            category: 'Cyclist',
+            action: 'click',
+        });
           setTimeout(() => {
               this.setState({
                   cyclist: !this.state.cyclist
@@ -46,7 +52,8 @@ class After extends React.Component {
       render () {
           if(this.state.after){
               return(
-                <Info history={this.props.history} cyclist={true}/>
+  
+                <Info history={this.props.history} cyclist={true} language={this.props.language} />
               )
           }
           return(
@@ -75,7 +82,7 @@ class After extends React.Component {
                           <Grid.Column width={10}>
                               <div className='box'>
                                   <TransitionGroup>
-                                      { this.state.cyclist && <Cyclist speak={'Hey, thanks a lot. You showed me that repairing is easy. Just use Liiteri!'}/>}
+                                      { this.state.cyclist && <Cyclist speak={this.props.language.cyclist2}/>}
                                   </TransitionGroup></div>
                           </Grid.Column>
                       </Grid.Row>

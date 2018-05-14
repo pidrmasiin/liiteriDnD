@@ -4,10 +4,16 @@ import girl from './girl.png'
 import apploud from './apploud.png'
 import applauds from './applaud.mp3'
 import '../App.css';
+import ReactGA from 'react-ga';
+
 
 class After extends React.Component {
   
     componentWillMount = () => {
+        ReactGA.event({
+            category: 'Lost',
+            action: 'click',
+        });
         setTimeout(() => {
             this.props.history.push('/info')
         }, 5850)
@@ -16,7 +22,6 @@ class After extends React.Component {
     componentWillUnmount = () => {
     }
     render() {
-       
         return (
                   <Grid style={{height: '100vh'}}>
                     <Grid.Row>
@@ -35,11 +40,10 @@ class After extends React.Component {
                     </Grid.Row>
                     <Grid.Row style={{height: '10%'}}>
                     <Grid.Column  width={16}>
-                    <Header><h1 className='speak'>Jihuu löysit Liiterin!</h1></Header>
-                    <Header><h1 className='speak'>Congratulation you found the nearest repair shop. It's right in front of you!</h1></Header>
+                    <Header><h1 className='speak'>{this.props.lang.congrats}</h1></Header>
                     </Grid.Column>
                     </Grid.Row>
-                    <Grid.Row style={{height: '70%'}}>
+                    <Grid.Row style={{height: '50%'}}>
                     <img style={{
                     width: '100%',
                     height: '100%'

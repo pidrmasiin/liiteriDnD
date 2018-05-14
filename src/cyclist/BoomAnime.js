@@ -7,6 +7,7 @@ import Broken from './Broken.js'
 import { Grid } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import birds from './sounds/birds.mp3'
+import Language from '../components/Language.js'
 
 let  timerId = null
 
@@ -47,10 +48,10 @@ class BoomAnime extends React.Component {
         clearTimeout(timerId);
     }
 
-  
     render () {
         
         return (
+            <div>
             <Link to="/after"> 
             <Grid style={{height: '100vh'}}>
             <Logo/>
@@ -63,8 +64,8 @@ class BoomAnime extends React.Component {
              <Grid.Column width={12}>
              <TransitionGroup>
              {this.state.cyclist && <Cyclist/>}
-             { this.state.boom && <Boom/>}
-             {this.state.broken && <Broken history={this.props.history}/>}
+             {this.state.boom && <Boom/>}
+             {this.state.broken && <Broken history={this.props.history} language={this.props.language}/>}
              </TransitionGroup>
              </Grid.Column>
              <Grid.Column width={2}>
@@ -74,6 +75,8 @@ class BoomAnime extends React.Component {
              </Grid.Row>
              </Grid>
              </Link> 
+             <Language language={this.props.language}/>
+           </div>
    
         )
     }

@@ -22,21 +22,23 @@ class Drop extends React.Component {
     
     after = () => {
         this.context.store.dispatch(
-            {type: 'AFTER'}
+            {type: 'AFTER',
+            language: this.context.store.getState().language.finnish}
           )
+          return(<div/>)
     }
     
     render() {
         const { connectDropTarget, isOver } = this.props;
    
-            return connectDropTarget(
+            return (
                 <div style={{
                     position: 'absolute',
-                    width: '450px',
+                    width: '100%',
                     height: '100%'
                   }}>
-                    <img style={{ width:'450px',
-                    height: '450px'}}src={cottage} alt='kylä'/>
+                    {connectDropTarget(<img style={{ width:'100%',
+                    height: '100%'}}src={cottage} alt='kylä'/>)}
                   
                     {isOver &&
                       this.after()

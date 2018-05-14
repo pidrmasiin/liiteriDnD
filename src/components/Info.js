@@ -1,14 +1,17 @@
 import React from 'react'
 import './Info.css'
-import { Grid, Image, Header, Form, Message, Button, Icon, Item } from 'semantic-ui-react'
+import { Grid, Image, Header, Form, Message, Button, Icon, Item, Checkbox } from 'semantic-ui-react'
 import Circle from './Circle'
+import Language from './Language'
 import userService from '../services/user'
+
 
 
 class Info extends React.Component {
     state = {
         date: Date,
         visible: false,
+        checkbox: false,
         info: false,
         phone: '',
         email: ''
@@ -18,6 +21,11 @@ class Info extends React.Component {
         this.setState({
             date: new Date()
         })
+        setTimeout(() => {
+            this.setState({
+                info: false
+            })
+           }, 6000);
         setTimeout(() => {
             this.addUserAndRenderHome()
            }, 90000);
@@ -31,16 +39,23 @@ class Info extends React.Component {
 
     add = (e) => {
         e.preventDefault()
-        this.setState({
-            visible: true,
-            phone: e.target.phone.value,
-            email: e.target.email.value
-        })
-       setTimeout(() => {
-        this.addUserAndRenderHome()
-       }, 4000);
-        
-
+        if(document.getElementById("checkbox").checked){
+            this.setState({
+                checkbox: false}
+            )
+            this.setState({
+                visible: true,
+                phone: e.target.phone.value,
+                email: e.target.email.value
+            })
+           setTimeout(() => {
+            this.addUserAndRenderHome()
+           }, 4000);
+        } else {
+            this.setState({
+                checkbox: true}
+            )
+        }
     }
     
     addUserAndRenderHome = () => {
@@ -56,12 +71,12 @@ class Info extends React.Component {
             window.location.assign('/lost')
         }
     }
+
+  
     
     render() {
         return (
-                <Grid className='container'>
-                    <Grid.Row>
-                    </Grid.Row>
+                <Grid>
                     <Grid.Row>
                     <Grid.Column width={2}>
                         </Grid.Column>
@@ -70,29 +85,36 @@ class Info extends React.Component {
                           <Item >
                               <Item.Content>
                               <Image src="http://liiteri.net/wp-content/uploads/2017/12/Liiteri-logo_700x300.png" alt="logo" />
-                                  <Item.Header><p style={{textAlign: 'center'}}>Hassle-free repair @Liiteri.  Liiteri.net provides repais services and houshold tools for rent. </p></Item.Header>
+                                  <Item.Header><h2 style={{textAlign: 'center'}}>{this.props.language.header} </h2></Item.Header>
                               </Item.Content>
                           </Item>
                       </Item.Group>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row verticalAlign='top'>
-                        <Grid.Column width={7}>
+                        <Grid.Column width={8}>
                             <Circle
                                 head='24/7'
                                 description=''
-                                text='Repair service that never closes'
+                                text={this.props.language.circle1}
                                 color='pink'
                             />
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row verticalAlign='middle'>
-                        <Grid.Column width={9}>
+                    <Grid.Column width={2}>
+                    </Grid.Column>
+                        <Grid.Column width={6}>
+                        {this.state.info &&
+                        <Header style={{border: "3px solid orange"}}>
+                           {this.props.language.info}</Header>
+                        }
+
                         </Grid.Column>
-                        <Grid.Column width={7}>
+                        <Grid.Column width={8}>
                             <Circle
                                 head='On the go...'
-                                text='Repair service easily accessible on your mobile'
+                                text={this.props.language.circle2}
                                 description=''
                                 color='#ccffff'
                                 button={true}
@@ -100,19 +122,16 @@ class Info extends React.Component {
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row verticalAlign='bottom'>
-                        <Grid.Column width={1}>
-                        </Grid.Column>
-                        <Grid.Column width={7}>
+                        <Grid.Column width={9}>
                             <Circle
                                 head='Contact'
                                 description=''
-                                text='Leaves us your worries and contact information and we will take care of the rest'
+                                text={this.props.language.circle3}
                                 color='#ffff66'
                             />
                         </Grid.Column>
-                        <Grid.Column width={1}>
-                        </Grid.Column>
-                        <Grid.Column width={7}>
+                        
+                        <Grid.Column width={6}>
                             <Form success onSubmit={this.add}>
                                 <Form.Field>
                                     <label>Phone</label>
@@ -127,14 +146,20 @@ class Info extends React.Component {
                                     header='Form Completed'
                                     content="You're all signed up for the newsletter"
                                 />
+                                  <Form.Field control={Checkbox} id="checkbox" label={<label>I accept <a href='/privacy'>the privacy policy</a></label>}/>
+                                  {this.state.checkbox && <Message style={{background: 'tomato'}}
+                                    header='Accept the privacy policy first'
+                                />}
                                 <Button positive type="submit">Submit</Button>
                             </Form>
+                        </Grid.Column>
+                        <Grid.Column width={1}>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>
                         <Grid.Column width={1}>
                         </Grid.Column>
-                        <Grid.Column width={15}>
+                        <Grid.Column width={14}>
                        
                             <br/>
                            <Button animated attached='bottom' color='orange' onClick={this.info}>
@@ -143,18 +168,16 @@ class Info extends React.Component {
                            <Icon name='hide' />
                            </Button.Content>
                            </Button>
-                           {this.state.info &&
-                        <Header>
-                            I am a magic box where broken bikes become fixed. Access me whenever you need. Just register with your email address and you will receive a unique code on your mobile. This magic password will let you inside. 
-                            Your bike will be safe in gentle hands and we will repair it as soon as possible. We will reach out to you when the wounds of your beloved bike have been healed.  
-                            BTW! I also contain a great selection of household tools that are in your service around the clock with 9,99€ monthly. Sounds cool? Go check more information on our website liiteri.net.</Header>
-                        }
+                        </Grid.Column>
+                        <Grid.Column width={1}>
                         </Grid.Column>
                     </Grid.Row>
+                   <Language language={this.props.language}/>
                 </Grid>
                
         )
     }
 }
+
 
 export default Info

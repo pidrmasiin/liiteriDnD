@@ -6,6 +6,8 @@ import Cyclist from './Cyclist.js'
 import { Link } from 'react-router-dom'
 import { Grid } from 'semantic-ui-react'
 import Logo from './Logo.js'
+import Language from '../components/Language.js'
+import ReactGA from 'react-ga';
 
 let timerId = null
 
@@ -16,11 +18,12 @@ class Unbroken extends React.Component {
             cyclist: false,
             redirect:false,
             out: false,
-            boom: false,
+            boom: false
         };
     }
       
       componentDidMount = () => {
+        ReactGA.pageview('/cyclist');
       setTimeout(() => {
           this.setState({
               cyclist: !this.state.cyclist
@@ -38,11 +41,12 @@ class Unbroken extends React.Component {
         clearTimeout(timerId);
     }
 
-
+  
 
   render () {
       return (   
-          <Link to="/after"> 
+         <div>
+              <Link to="/after"> 
           <Grid style={{height: '100vh'}}>
                 <Logo/>
                 <Grid.Row style={{height: '60%'}}>
@@ -51,13 +55,18 @@ class Unbroken extends React.Component {
                 <Grid.Column width={12}>
                                   <TransitionGroup>
                                 
-                                      { this.state.cyclist && <Cyclist speak={'Hey, its nice to be a cyclist'}/>}
+                                      { this.state.cyclist && <Cyclist speak={this.props.language.cyclist}/>}
                                       
                                       </TransitionGroup>
                                       </Grid.Column>
                                       </Grid.Row>
+                                    
+                                      
                                       </Grid>
-          </Link>
+                                      </Link>
+                                      <Language language={this.props.language}/>
+                                      </div>
+          
           )
   }
 }

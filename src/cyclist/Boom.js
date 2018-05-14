@@ -28,8 +28,7 @@ class Boom extends React.Component {
         return <div className="boom" ref={c => this.container = c}>
                     <audio autoPlay>
                      <source src={bom}/>
-                </audio> }
-            
+                </audio> 
             <img src={boom} alt='BOOM' className="logo"/>
         </div>
     }
