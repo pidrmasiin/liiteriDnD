@@ -27,7 +27,7 @@ class Language extends React.Component {
             <Grid.Column width={12}>
             </Grid.Column>
             <Grid.Column width={3}>
-            <Button onClick={this.language} color='blue'>in english/suomeksi</Button>
+            <Button onClick={this.language} color='blue'>{this.props.language.language}</Button>
             </Grid.Column>
             <Grid.Column width={1}>
             </Grid.Column>

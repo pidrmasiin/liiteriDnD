@@ -113,18 +113,18 @@ class Info extends React.Component {
                         </Grid.Column>
                         <Grid.Column width={8}>
                             <Circle
-                                head='On the go...'
+                                buttons={this.props.language.buttons}
+                                head={this.props.language.circle2head}
                                 text={this.props.language.circle2}
-                                description=''
+                                description={this.props.language.move}
                                 color='#ccffff'
-                                button={true}
-                            />
+                                />
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row verticalAlign='bottom'>
                         <Grid.Column width={9}>
                             <Circle
-                                head='Contact'
+                                head={this.props.language.circle3head}
                                 description=''
                                 text={this.props.language.circle3}
                                 color='#ffff66'
@@ -134,7 +134,7 @@ class Info extends React.Component {
                         <Grid.Column width={6}>
                             <Form success onSubmit={this.add}>
                                 <Form.Field>
-                                    <label>Phone</label>
+                                    <label>{this.props.language.form.phone}</label>
                                     <input placeholder='404-12456879' name='phone'/>
                                 </Form.Field>
                                 <Form.Field>
@@ -143,14 +143,13 @@ class Info extends React.Component {
                                 </Form.Field>
                                 <Message style={{ display: this.state.visible ? '' : 'none' }}
                                     success
-                                    header='Form Completed'
-                                    content="You're all signed up for the newsletter"
+                                    content={this.props.language.form.submitNote}
                                 />
-                                  <Form.Field control={Checkbox} id="checkbox" label={<label>I accept <a href='/privacy'>the privacy policy</a></label>}/>
+                                  <Form.Field control={Checkbox} id="checkbox" label={<label><a href='/privacy'>{this.props.language.form.privacy}</a></label>}/>
                                   {this.state.checkbox && <Message style={{background: 'tomato'}}
-                                    header='Accept the privacy policy first'
+                                    header={this.props.language.form.privacyNote}
                                 />}
-                                <Button positive type="submit">Submit</Button>
+                                <Button positive type="submit">{this.props.language.form.submit}</Button>
                             </Form>
                         </Grid.Column>
                         <Grid.Column width={1}>
