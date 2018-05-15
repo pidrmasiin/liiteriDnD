@@ -1,9 +1,9 @@
 const afterReducer = (store = false, action) => {
-    if (action.type==='AFTER') {
-        store = true
-      return store
-    }
-    return store
+  if (action.type === 'AFTER') {
+    return true;
   }
-  
-  export default afterReducer
+  return store;
+};
+
+export default afterReducer;
+

@@ -1,26 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 import App from './App';
-import { createStore, combineReducers } from 'redux'
-import afterReducer from './reducers/afterReducer'
-import languageReducer from './reducers/languageReducer'
-import { Provider } from 'react-redux'
+import afterReducer from './reducers/afterReducer';
+import languageReducer from './reducers/languageReducer';
 
 const reducer = combineReducers({
   after: afterReducer,
-  language: languageReducer
-}); 
+  language: languageReducer,
+});
 
-const store = createStore(reducer)
+const store = createStore(reducer);
 
 const render = () => {
-
-    ReactDOM.render(
+  ReactDOM.render(
     <Provider store={store}>
-      <App store={store}/>
+      <App store={store} />
     </Provider>,
-  document.getElementById('root'))
-  }
-  
-  render()
-  store.subscribe(render)
+    document.getElementById('root'),
+  );
+};
+
+render();
+store.subscribe(render);
