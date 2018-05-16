@@ -71,14 +71,8 @@ class Drag extends React.Component {
       const visible = {
         opacity: isDragging ? 0.5 : 1,
         cursor: 'move',
-        height: '100%',
-        weight: '100%',
       };
-
-
       return (
-
-
         <Grid style={{ height: '100vh', weight: '100vh' }}>
 
           <Grid.Row style={{ height: '5%' }}>
@@ -104,10 +98,7 @@ class Drag extends React.Component {
          }
             </Grid.Column>
           </Grid.Row>
-
           <Grid.Row style={{ height: '40%' }}>
-
-
             <Grid.Column width={5}>
               {this.state.show &&
               <div>

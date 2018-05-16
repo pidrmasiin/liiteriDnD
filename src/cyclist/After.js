@@ -64,27 +64,18 @@ class After extends React.Component {
               <source src={cheering} />
             </audio>
             <Grid style={{ height: '100vh' }}>
-              <Grid.Row />
-              <Grid.Row />
-              <Grid.Row />
-              <Grid.Row>
+              <Grid.Row style={{ height: '90%' }}>
                 <Grid.Column width={5}>
                   <Happy />
                 </Grid.Column>
                 <Grid.Column className="bicycle" width={6}>
                   <Image src="http://liiteri.net/wp-content/uploads/2017/12/Liiteri-logo_700x300.png" alt="logo" />
                 </Grid.Column>
-              </Grid.Row>
-              <Grid.Row>
-                <Grid.Column width={5} />
-                <Grid.Column width={10}>
-                  <div className="box">
-                    <TransitionGroup>
-                      { this.state.cyclist &&
-                      <Cyclist speak={this.props.language.cyclist2} />}
-                    </TransitionGroup>
-                  </div>
-                </Grid.Column>
+                <Grid.Column />
+                <TransitionGroup>
+                  { this.state.cyclist &&
+                  <Cyclist speak={this.props.language.cyclist2} />}
+                </TransitionGroup>
               </Grid.Row>
               <Grid.Row />
             </Grid>
