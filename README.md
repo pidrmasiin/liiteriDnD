@@ -1,6 +1,6 @@
 # Drag and Drop -animation for liiteri
 
-Two animation for testing the liiteri's tablet. https://liiterimap.herokuapp.com/ 
+Two animation for testing the liiteri's tablet (892x1517). https://liiterimap.herokuapp.com/ 
 
 To use locally you need nodeJs and npm. https://nodejs.org/en/ 
 

@@ -70,73 +70,68 @@ class Drag extends React.Component {
       const { connectDragSource, isDragging } = this.props;
       const visible = {
         opacity: isDragging ? 0.5 : 1,
-        fontSize: 25,
-        fontWeight: 'bold',
         cursor: 'move',
+        height: '100%',
+        weight: '100%',
       };
 
 
       return (
-        <div className="test" >
 
-          <Grid style={{ height: '100vh' }}>
 
-            <Grid.Row style={{ height: '5%' }}>
-              <Grid.Column width={16}>
-                <h1 className="speak">LIITERI!</h1>
-              </Grid.Column>
-            </Grid.Row>
+        <Grid style={{ height: '100vh', weight: '100vh' }}>
 
-            <Grid.Row style={{ height: '40%' }}>
-              <Grid.Column width={1} />
-              <Grid.Column width={7} />
-              <Grid.Column width={5}>
-                {!this.state.show &&
-                <div>
-                  <audio autoPlay>
-                    <source src={hello} />
-                  </audio>
-                  <h1 className="speak">{this.props.store.language.help}</h1>
-                </div>}
-                {!this.state.show &&
+          <Grid.Row style={{ height: '5%' }}>
+            <Grid.Column width={16}>
+              <h1 className="speak">LIITERI!</h1>
+            </Grid.Column>
+          </Grid.Row>
+
+          <Grid.Row style={{ height: '40%' }}>
+            <Grid.Column width={1} />
+            <Grid.Column width={7} />
+            <Grid.Column width={5}>
+              {!this.state.show &&
+              <div>
+                <audio autoPlay>
+                  <source src={hello} />
+                </audio>
+                <h1 className="speak">{this.props.store.language.help}</h1>
+              </div>}
+              {/* eslint-disable */}
+              {!this.state.show &&
            connectDragSource(<img id="dragable" style={visible} alt="girl" id="drag1" src={girl} draggable="true" />)
          }
-              </Grid.Column>
-            </Grid.Row>
+            </Grid.Column>
+          </Grid.Row>
 
-            <Grid.Row style={{ height: '35%' }}>
+          <Grid.Row style={{ height: '40%' }}>
 
 
-              <Grid.Column width={5}>
-                {this.state.show &&
-                <div>
-                  <audio autoPlay>
-                    <source src={please} />
-                  </audio>
-                  <h1 className="speak">{this.props.store.language.drag}</h1>
-                </div>}
-                {this.state.show &&
+            <Grid.Column width={5}>
+              {this.state.show &&
+              <div>
+                <audio autoPlay>
+                  <source src={please} />
+                </audio>
+                <h1 className="speak">{this.props.store.language.drag}</h1>
+              </div>}
+              {this.state.show &&
            connectDragSource(<img id="dragable" style={visible} alt="girl" id="drag1" src={girl} draggable="true" />)
          }
-              </Grid.Column>
+            </Grid.Column>
+            <Grid.Column width={2} />
+            <Grid.Column width={8}>
+              <Drop>
+                <div id="div1" onDrop={this.show} onDragOver={this.allowDrop}>
+                  <img src={cottage} alt="kylä" />
+                </div>
+              </Drop>
+            </Grid.Column>
+          </Grid.Row>
+          <Language language={this.props.store.language} />
+        </Grid>
 
-
-              <Grid.Column width={2} />
-              <Grid.Column width={8}>
-                <Drop>
-                  <div id="div1" onDrop={this.show} onDragOver={this.allowDrop}>
-                    <img src={cottage} alt="kylä" />
-                  </div>
-                </Drop>
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row style={{ height: '15%' }}>
-              <Grid.Column width={12} />
-              <Grid.Column width={2} />
-            </Grid.Row>
-            <Language language={this.props.store.language} />
-          </Grid>
-        </div>
       );
     }
     document.getElementById('body').className = 'body';
